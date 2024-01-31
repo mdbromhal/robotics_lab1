@@ -9,9 +9,9 @@ from turtlesim.msg import Pose
 from robotics_lab1.msg import Turtlecontrol
 
 # Declaring a global variable
-pos_msg = Turtlecontrol()
+turtle_msg = Turtlecontrol()
 
-pose_message = Pose()
+pose_msg = Pose()
 
 import math
 
@@ -22,15 +22,15 @@ def turtlesim_pose_callback(data):
 	Function to retreive position date for the Turtlesim_node subscriber
 	'''
 	
-	global pose_message
+	global pose_msg
 	
 	# Convert angular position to degrees
 	rot_in_degree = data.theta * ROTATION_SCALE
 	
 	# Convert x and y to cm
-	pose_message.x = data.x
-	pose_message.y = data.y
-	pose_message.theta = data.theta
+	pose_msg.x = data.x
+	pose_msg.y = data.y
+	pose_msg.theta = data.theta
 
 
 def turtlecontrol_pose_callback(data):
@@ -39,15 +39,12 @@ def turtlecontrol_pose_callback(data):
 	'''
 
 	# Calling global variable
-	global pos_msg
-	
-	# Convert angular position to degrees
-	pos_msg.theta = data.theta * ROTATION_SCALE
+	global turtle_msg
 	
 	# Convert x and y to cm
-	pos_msg.x = data.x
-	pos_msg.y = data.y
-	pos_msg.theta = data.theta
+	turtle_msg.x = data.x
+	turtle_msg.y = data.y
+	turtle_msg.theta = data.theta
 
 
 def proportional_controller(data):
@@ -58,6 +55,7 @@ def proportional_controller(data):
 	
 	pos_msg.kp = data.kp
 	pos_msg.xd = data.xd
+	
 	return vt
 	 
 	
