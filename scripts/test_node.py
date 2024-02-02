@@ -61,13 +61,15 @@ if __name__ == '__main__':
 	# Declare variable of type Twist for sending control commands
 	vel_cmd = Twist()
 	
+	# Declare variable of type Turtlecontrol for sending control commands
+	#prop_cont = Turtlecontrol()
+	
+	
 	
 	while not rospy.is_shutdown():
 	
 		# Calculate vt = kp * (xd - xt)
 		vel_cmd.linear.x = turtlecontrol_msg.kp * (turtlecontrol_msg.xd - pose_msg.x)
-		# Use turtlecontrol_msg because this is where the subscriber is storing the data
-		# Use pose_msg because this is where the subscriber is storing the turtle's current position 
 		
 		# Publish the message
 		cmd_pub.publish(vel_cmd)
